@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/ui/screens/homescreen/homescreen.dart';
+import 'package:todo/utils/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +14,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Todo',
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: ThemeData(
+        backgroundColor: secondaryColor,
+        scaffoldBackgroundColor: secondaryColor,
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: primaryColor
+        ),
         textTheme: const TextTheme(
           headline4: TextStyle(
             color: Colors.white,
@@ -25,11 +32,11 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.w500
           ),
           subtitle1: TextStyle(
-            color: Colors.teal,
+            color: primaryColor,
             fontWeight: FontWeight.w500
           )
         ),
-        primarySwatch: Colors.teal,
+        primarySwatch: MaterialColor(primaryColor.value, primaryColorSwatch),
         buttonTheme: ButtonThemeData(
           padding: const EdgeInsets.all(8),
           buttonColor: Colors.white,

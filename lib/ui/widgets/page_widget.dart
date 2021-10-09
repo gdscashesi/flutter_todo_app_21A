@@ -24,10 +24,12 @@ class PageWidget extends StatelessWidget {
           elevation: 0,
         ),
 
-        backgroundColor: Colors.teal,
+
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
-        floatingActionButton: floatingActionButton,
+        floatingActionButton: Container(
+          margin: EdgeInsets.only(bottom: size.height * 0.05),
+            child: floatingActionButton),
 
         body: SizedBox(
           width: size.width,

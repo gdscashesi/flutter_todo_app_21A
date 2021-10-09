@@ -29,6 +29,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       child: Icon(Icons.folder_shared),
                     ),
                     DropdownButton(
+
                       value: "All",
                       onChanged: (val){
 
@@ -71,7 +72,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
 
 
-                //todo malke alarm widget
+                //todo make alarm widget
                 ListTile(
                   title: const Text("Alarm"),
                   trailing: const Text("Mon 30/02/2021, 16,2:00PM"),

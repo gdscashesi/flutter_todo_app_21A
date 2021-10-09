@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/ui/screens/homescreen/widgets/task_tile.dart';
+import 'package:todo/utils/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: secondaryColor,
         body: Container(
           padding:  EdgeInsets.symmetric(vertical: size.height * 0.05, horizontal: 12),
         child: Column(
