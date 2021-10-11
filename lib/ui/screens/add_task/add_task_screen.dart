@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo/ui/widgets/custom_alarm_widget.dart';
+import 'package:todo/ui/widgets/custom_image_picker.dart';
 import 'package:todo/ui/widgets/custom_textfield.dart';
 import 'package:todo/ui/widgets/page_widget.dart';
+import 'package:todo/ui/widgets/select_priority_tile.dart';
+import 'package:todo/ui/widgets/task_group_drop_down.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({Key? key}) : super(key: key);
@@ -10,6 +14,35 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
+  late DateTime date;
+  late bool setDate;
+  late String taskGroup;
+  late List<String> imageList;
+  int? priority;
+  TextEditingController title = TextEditingController();
+  TextEditingController notes = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    date = DateTime.now();
+    setDate = false;
+    taskGroup = "all";
+    imageList = [];
+  }
+
+
+  @override
+  void dispose() {
+    title.dispose();
+    notes.dispose();
+
+    super.dispose();
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -22,88 +55,58 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             child: Column(
               children: [
 
-                Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.folder_shared),
-                    ),
-                    DropdownButton(
-
-                      value: "All",
-                      onChanged: (val){
-
-                      },
-                      items: const [
-                        DropdownMenuItem(
-                          child: Text("All"),
-                          value: "All",
-                        ),
-
-                        DropdownMenuItem(
-                          child: Text("Work"),
-                          value: "Work",
-                        )
-                      ],
-
-                    ),
-                  ],
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TaskGroupDropDown(
+                      value: taskGroup
+                  ),
                 ),
 
-
                 CustomTextField(
-                    controller: TextEditingController(),
+                    controller: title,
                   hintText: "Title",
                 ),
 
 
                 CustomTextField(
-                    controller: TextEditingController(),
+                    controller: notes,
                   maxLines: 5,
                   hintText: "Notes",
                 ),
 
                 SwitchListTile(
-                  value: false,
+                  value: setDate,
                   title: const Text("Set Date"),
                   onChanged: (value){
-
+                    setState(() {
+                      setDate = value;
+                    });
                   },
                 ),
 
 
-                //todo make alarm widget
-                ListTile(
-                  title: const Text("Alarm"),
-                  trailing: const Text("Mon 30/02/2021, 16,2:00PM"),
-                  onTap: (){
-
-                  },
+                CustomAlarmWidget(
+                  selectedDate: date,
+                  enabled : setDate
                 ),
 
 
-                ListTile(
-                  title: const Text("Priority"),
-                  trailing: const Icon(Icons.arrow_forward_ios),
-                  onTap: (){
-
-                  },
+                const Divider(thickness: 1,),
+                SelectPriorityTile(
+                  value: priority
                 ),
-                TextButton(
-                  child: Row(
-                    children: const [
-                      Icon(Icons.add),
-                      Text("Add Image", style: TextStyle(color: Colors.black),)
-                    ],
-                  ),
-                  onPressed: (){
+                const Divider(thickness: 1,),
 
-                  },
+
+                CustomImagePicker(
+                  images: imageList
                 ),
 
 
 
                 const Spacer(flex: 3,),
+
+
                 ElevatedButton(
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(
@@ -122,7 +125,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       width: size.width * 0.7,
                       child: const Center(child: Text("Create"))),
                   onPressed: (){
-
+                    Navigator.pop(context);
                   },
                 ),
 
