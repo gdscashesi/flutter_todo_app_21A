@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/ui/screens/homescreen/homescreen.dart';
+import 'package:todo/ui/screens/login_screen/login_screen.dart';
 import 'package:todo/utils/constants.dart';
 
 void main() {
@@ -46,9 +47,9 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: const SafeArea(
+      home:  SafeArea(
         bottom: false,
-          child: HomeScreen()
+          child: LoginScreen()
       ),
     );
   }

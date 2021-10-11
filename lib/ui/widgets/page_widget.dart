@@ -44,20 +44,18 @@ class PageWidget extends StatelessWidget {
                 child: Text(title, style: Theme.of(context).textTheme.headline4,),
               ),
 
-              SingleChildScrollView(
-                child: Container(
-                  width: size.width ,
-                  height: size.height * 0.77,
-                  padding: const EdgeInsets.only(top:16),
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(40),
-                        topLeft: Radius.circular(40),
-                      )
-                  ),
-                  child: child,
+              Container(
+                width: size.width ,
+                height: size.height * 0.77,
+                padding: const EdgeInsets.only(top:16),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(40),
+                      topLeft: Radius.circular(40),
+                    )
                 ),
+                child: child,
               )
 
             ],

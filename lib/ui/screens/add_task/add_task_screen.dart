@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/ui/widgets/custom_alarm_widget.dart';
+import 'package:todo/ui/widgets/custom_button.dart';
 import 'package:todo/ui/widgets/custom_image_picker.dart';
 import 'package:todo/ui/widgets/custom_textfield.dart';
 import 'package:todo/ui/widgets/page_widget.dart';
@@ -107,27 +108,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 const Spacer(flex: 3,),
 
 
-                ElevatedButton(
-                  style: ButtonStyle(
-                      textStyle: MaterialStateProperty.all(
-                          const TextStyle(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 18
-                          )
-                      ),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(232)
-                      )),
-                      // backgroundColor: MaterialStateProperty.all(Colors.white),
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(16))
-                  ),
-                  child: SizedBox(
-                      width: size.width * 0.7,
-                      child: const Center(child: Text("Create"))),
-                  onPressed: (){
-                    Navigator.pop(context);
-                  },
-                ),
+            CustomButton(
+              text: "Create",
+              onPressed: (){
+                Navigator.pop(context);
+              }
+            ),
 
                 const Spacer(flex: 1,),
               ],
