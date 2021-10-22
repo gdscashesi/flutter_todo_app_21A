@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: ThemeData(
+        // canvasColor: Colors.white,
         backgroundColor: secondaryColor,
-        scaffoldBackgroundColor: secondaryColor,
+        // scaffoldBackgroundColor: secondaryColor,
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: primaryColor
         ),

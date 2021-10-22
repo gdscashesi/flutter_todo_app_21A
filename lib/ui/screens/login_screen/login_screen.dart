@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todo/ui/screens/homescreen/homescreen.dart';
+import 'package:todo/ui/widgets/background/background.dart';
 import 'package:todo/ui/widgets/custom_button.dart';
 import 'package:todo/ui/widgets/custom_textfield.dart';
 import 'package:todo/ui/widgets/page_widget.dart';
 import 'package:todo/ui/widgets/text_row.dart';
+import 'package:todo/utils/constants.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -16,13 +18,16 @@ class LoginScreen extends StatelessWidget {
   }) : super(key: key);
 
 
+
+
   @override
   Widget build(BuildContext context) {
-    return PageWidget(
-      title: 'Sign up',
+    return Background(
+      backgroundColor: secondaryColor,
+      // title: 'Sign up',
       child: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
