@@ -10,6 +10,7 @@ import 'package:todo/ui/widgets/text_row.dart';
 class SignUpScreen extends StatelessWidget {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
 
 
   SignUpScreen({
@@ -31,7 +32,7 @@ class SignUpScreen extends StatelessWidget {
               const Spacer(),
 
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: CustomTextField(
                   controller: email,
                   hintText: "Email",
@@ -40,7 +41,7 @@ class SignUpScreen extends StatelessWidget {
 
 
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: CustomTextField(
                     controller: password,
                     hintText: "Password",
@@ -53,8 +54,8 @@ class SignUpScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomTextField(
-                    controller: password,
-                    hintText: "Password",
+                    controller: confirmPassword,
+                    hintText: "Confirm password",
                     obscureText: true
                 ),
               ),

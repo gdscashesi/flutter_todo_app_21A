@@ -5,10 +5,16 @@ import 'package:todo/ui/widgets/background/background_painter.dart';
 class Background extends StatefulWidget {
   final Widget child;
   final AnimationController? controller;
+  final AppBar? appBar;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final Widget? floatingActionButton;
   final bool animated;
   final Color? backgroundColor;
   const Background({
     Key? key,
+    this.appBar,
+    this.floatingActionButtonLocation,
+    this.floatingActionButton,
     this.animated = false,
     this.backgroundColor,
     required this.child,
@@ -58,6 +64,7 @@ class _BackgroundState extends State<Background> with SingleTickerProviderStateM
 @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: widget.appBar,
       backgroundColor: widget.animated ? null: widget.backgroundColor!,
       body: widget.animated ?
 

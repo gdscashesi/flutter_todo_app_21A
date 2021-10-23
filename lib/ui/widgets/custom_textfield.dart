@@ -30,6 +30,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.obscureText,
       decoration: InputDecoration(
         hintText: widget.hintText,
+        hintStyle: const TextStyle(
+          color: Colors.grey
+        ),
         border: const UnderlineInputBorder()
       ),
     );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo/ui/widgets/background/background.dart';
+import 'package:todo/utils/constants.dart';
 
 
 class PageWidget extends StatelessWidget {
@@ -18,20 +20,22 @@ class PageWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
 
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
+    return Background(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
 
 
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
-        floatingActionButton: Container(
+      floatingActionButton: Container(
           margin: EdgeInsets.only(bottom: size.height * 0.05),
-            child: floatingActionButton),
+          child: floatingActionButton),
 
-        body: SizedBox(
+      backgroundColor: secondaryColor,
+      child: SingleChildScrollView(
+        child: SizedBox(
           width: size.width,
           height: size.height,
           child: Column(
@@ -45,8 +49,8 @@ class PageWidget extends StatelessWidget {
               ),
 
               Container(
-                width: size.width ,
-                height: size.height * 0.77,
+                width: size.width,
+                height: size.height * 0.85,
                 padding: const EdgeInsets.only(top:16),
                 decoration: const BoxDecoration(
                     color: Colors.white,
@@ -60,10 +64,8 @@ class PageWidget extends StatelessWidget {
 
             ],
           ),
-        )
-    )
-
-
-      ;
+        ),
+      ),
+    );
   }
 }
