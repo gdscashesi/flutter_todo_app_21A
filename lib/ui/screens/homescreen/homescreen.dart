@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo/ui/screens/homescreen/widgets/task_tile.dart';
 import 'package:todo/ui/widgets/background/background.dart';
-import 'package:todo/utils/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/utils/providers/app_state.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       vsync: this
     );
   }
-
+//todo ensure  user is signed in, else redirect to auth screens
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -36,8 +37,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  [
-                Text("Hello Gabriel!", style: Theme.of(context).textTheme.headline4,),
-                Text("You have 3 tasks scheduled\nfor today", style: Theme.of(context).textTheme.headline6,),
+                Text("Hello ${context.read<AppState>().user!.displayName ?? "user"}!",
+                  style: Theme.of(context).textTheme.headline4,),
+                Text("You have ${context.read<AppState>().taskList.taskCount} tasks scheduled\nfor today", style: Theme.of(context).textTheme.headline6,),
                 ElevatedButton(
                   style: ButtonStyle(
                       elevation: MaterialStateProperty.all(0),

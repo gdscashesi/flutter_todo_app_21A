@@ -7,6 +7,7 @@ class Task{
   late bool setDate;
   late String taskGroup;
   late DateTime date;
+  String? reference;
   List<String>? imageList;
   int? priority;
 

@@ -11,10 +11,7 @@ Future<User?> signInWithEmail(
         await auth.signInWithEmailAndPassword(email: email, password: password);
     return credential.user;
   } on FirebaseAuthException catch (e) {
-    print(e.message);
-    print(e.code);
-    print("\n\n\n");
-    // switch (e.code)
+    authErrorPopUp(e.code, context);
   }
 }
 

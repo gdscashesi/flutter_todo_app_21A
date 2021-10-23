@@ -63,7 +63,7 @@ class _ImageRow extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: images.length,
-        itemBuilder: (context,index) => _ImageTile(),
+        itemBuilder: (context,index) => const _ImageTile(),
       ),
     );
   }
@@ -83,7 +83,7 @@ class _ImageTile extends StatelessWidget {
     return Container(
       width: size.width * 0.2,
       height: size.height * 0.1,
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       color: Colors.yellow
     );
   }
