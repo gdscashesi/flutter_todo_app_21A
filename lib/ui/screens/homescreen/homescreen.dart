@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:todo/ui/screens/add_task/add_task_screen.dart';
 import 'package:todo/ui/screens/homescreen/widgets/task_tile.dart';
 import 'package:todo/ui/widgets/background/background.dart';
 import 'package:provider/provider.dart';
+import 'package:todo/ui/widgets/custom_button.dart';
+import 'package:todo/utils/helpers/database.dart';
 import 'package:todo/utils/providers/app_state.dart';
+import 'package:todo/utils/providers/task_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   void initState() {
     super.initState();
     backgroundController = AnimationController(
-      duration: const Duration( milliseconds: 2500),
+      duration: const Duration( milliseconds: 1000),
       vsync: this
     );
   }
@@ -34,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         child: Container(
             padding:  EdgeInsets.symmetric(vertical: size.height * 0.05, horizontal: 12),
             child: Column(
+
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  [
@@ -71,19 +76,66 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                 SizedBox(
                   height: size.height * 0.4,
-                  child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 50,
-                        crossAxisSpacing: 50,
-                      ),
-                      itemBuilder: (context, index){
-                        return const TaskTile(
-                            icon: Icons.note,
-                            label: "All",
-                            count: 8
-                        );
-                      }),
+                  child: FutureBuilder(
+                    future: getTasks(context),
+                    builder: (context, snapshot){
+                      if (snapshot.connectionState == ConnectionState.done){
+                        TaskList list = context.read<AppState>().taskList;
+                      return list.taskCount > 0  ?
+                      GridView.builder(
+                          itemCount: list.groupCount,
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 50,
+                              crossAxisSpacing: 50,
+                            ),
+                            itemBuilder: (context, index){
+                            String group = list.getTasks().keys.elementAt(index);
+                              return  TaskTile(
+                                  icon: Icons.note,
+                                  label: group,
+                                  count: list.getGroupCount( group: group)
+                              );
+                            })
+
+                      : Center(
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              // elevation: MaterialStateProperty.all(0),
+                              textStyle: MaterialStateProperty.all(
+                                  const TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 18
+                                  )
+                              ),
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)
+                              )),
+                              // backgroundColor: MaterialStateProperty.all(Colors.white),
+                              // foregroundColor: MaterialStateProperty.all(Colors.teal),
+                              padding: MaterialStateProperty.all(const EdgeInsets.all(16))
+                          ),
+                          child: const Text("Add a Task"),
+                          onPressed: () {
+                            backgroundController.forward().whenComplete(() =>
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context)=> const AddTaskScreen()
+                                )
+                            ).then((value) => backgroundController.reverse())
+                            );
+                          },
+
+                        ),
+                      );
+                      }
+
+
+
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    },
+                  ),
                 )
 
               ],

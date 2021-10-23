@@ -6,6 +6,8 @@ import 'package:todo/ui/widgets/custom_textfield.dart';
 import 'package:todo/ui/widgets/page_widget.dart';
 import 'package:todo/ui/widgets/select_priority_tile.dart';
 import 'package:todo/ui/widgets/task_group_drop_down.dart';
+import 'package:todo/utils/helpers/database.dart';
+import 'package:todo/utils/models/task.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({Key? key}) : super(key: key);
@@ -110,7 +112,20 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             CustomButton(
               text: "Create",
               onPressed: (){
-                Navigator.pop(context);
+
+                Task task = Task(
+                  taskGroup: taskGroup,
+                  date: date,
+                  setDate: setDate,
+                  notes: notes.text,
+                  title: title.text,
+                );
+
+
+                uploadTask(
+                  context: context,
+                  task: task
+                ).then((value) => Navigator.pop(context));
               }
             ),
 

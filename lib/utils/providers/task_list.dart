@@ -9,6 +9,7 @@ class TaskList extends ChangeNotifier{
 
 
   int get taskCount => _taskCount;
+  int get groupCount => getGroupCount();
 
 
   void addTask({required Task task}){
@@ -20,20 +21,27 @@ class TaskList extends ChangeNotifier{
       _tasks[task.taskGroup] = {task.reference! : task};
     }
 
+
+    print("ee");
     _taskCount++;
+    notifyListeners();
   }
 
 
   void removeTask(Task task){
     if (_tasks.containsKey(task.taskGroup)) {
       _tasks[task.taskGroup]!.remove(task.reference);
-      _taskCount++;
+      _taskCount--;
     }
   }
 
 
-  int getGroupCount(String group){
-    return _tasks[group] == null ? 0 : _tasks[group]!.length ;
+  int getGroupCount({String? group}){
+    if (group != null) {
+      return _tasks[group] == null ? 0 : _tasks[group]!.length ;
+    }
+
+    return _tasks.keys.length;
   }
 
 
