@@ -5,17 +5,20 @@ import 'package:todo/ui/widgets/custom_button.dart';
 import 'package:todo/ui/widgets/custom_textfield.dart';
 import 'package:todo/ui/widgets/page_widget.dart';
 import 'package:todo/ui/widgets/text_row.dart';
-
+import 'package:provider/provider.dart';
+import 'package:todo/utils/providers/app_state.dart';
 
 class SignUpScreen extends StatelessWidget {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
-
+  late AppState appState;
 
   SignUpScreen({
     Key? key
   }) : super(key: key);
+
+
 
 
   @override
@@ -65,10 +68,17 @@ class SignUpScreen extends StatelessWidget {
                 child: CustomButton(
                     text: "Sign up",
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context)=> HomeScreen()
-                          )
-                      );
+
+                      context.read<AppState>().signUp(
+                          email: email.text,
+                          password: password.text).then((value) {
+                        if (value){
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context)=> const HomeScreen()
+                              )
+                          );
+                        }
+                      });
                     }
                 ),
               ),
@@ -80,6 +90,7 @@ class SignUpScreen extends StatelessWidget {
                   label: "Already have an account?",
                   actionText: "Sign In",
                   onPressed: (){
+
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context)=> LoginScreen()
                         )

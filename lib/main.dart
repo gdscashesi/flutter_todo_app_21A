@@ -1,10 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/ui/screens/homescreen/homescreen.dart';
 import 'package:todo/ui/screens/login_screen/login_screen.dart';
 import 'package:todo/utils/constants.dart';
+import 'package:todo/utils/providers/app_state.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider<AppState>(
+      create: (context) => AppState(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -48,9 +56,23 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home:  SafeArea(
-        bottom: false,
-          child: LoginScreen()
+      home: FutureBuilder(
+          future: Firebase.initializeApp(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done){
+              return SafeArea(
+                  bottom: false,
+                  child: LoginScreen()
+              );
+            }
+            else {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+          }
       ),
     );
   }

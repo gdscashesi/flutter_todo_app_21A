@@ -65,6 +65,8 @@ class _BackgroundState extends State<Background> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: widget.appBar,
+      floatingActionButton: widget.floatingActionButton,
+      floatingActionButtonLocation: widget.floatingActionButtonLocation,
       backgroundColor: widget.animated ? null: widget.backgroundColor!,
       body: widget.animated ?
 

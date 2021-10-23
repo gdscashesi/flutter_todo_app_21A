@@ -7,6 +7,8 @@ import 'package:todo/ui/widgets/custom_textfield.dart';
 import 'package:todo/ui/widgets/page_widget.dart';
 import 'package:todo/ui/widgets/text_row.dart';
 import 'package:todo/utils/constants.dart';
+import 'package:todo/utils/providers/app_state.dart';
+import 'package:provider/provider.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -57,10 +59,17 @@ class LoginScreen extends StatelessWidget {
               child: CustomButton(
                   text: "Log in",
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=> HomeScreen()
-                        )
-                    );
+
+                    context.read<AppState>().signIn(
+                        email: email.text,
+                        password: password.text).then((value) {
+                      if (value){
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context)=> const HomeScreen()
+                            )
+                        );
+                      }
+                    });
                   }
               ),
             ),
@@ -72,6 +81,7 @@ class LoginScreen extends StatelessWidget {
                 label: "Don't have an account?",
                 actionText: "Sign Up",
                 onPressed: (){
+
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context)=> SignUpScreen()
                       )
