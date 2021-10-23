@@ -11,15 +11,17 @@ class AppState extends ChangeNotifier{
 
 
 
-  Future<bool> signIn({required String email, required String password}) async {
-    _user = await signInWithEmail(email: email, password: password);
+  Future<bool> signIn({required BuildContext context,
+    required String email,
+    required String password}) async {
+    _user = await signInWithEmail(context: context, email: email, password: password);
     notifyListeners();
     return isSignedIn();
   }
 
 
-  Future<bool> signUp({required String email, required String password}) async {
-    _user = await signUpWithEmail(email: email, password: password);
+  Future<bool> signUp({required BuildContext context, required String email, required String password}) async {
+    _user = await signUpWithEmail(context: context, email: email, password: password);
     notifyListeners();
     return isSignedIn();
   }

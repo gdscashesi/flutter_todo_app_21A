@@ -70,6 +70,7 @@ class SignUpScreen extends StatelessWidget {
                     onPressed: () {
 
                       context.read<AppState>().signUp(
+                        context: context,
                           email: email.text,
                           password: password.text).then((value) {
                         if (value){

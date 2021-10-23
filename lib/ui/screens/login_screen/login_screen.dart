@@ -61,6 +61,7 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
 
                     context.read<AppState>().signIn(
+                        context: context,
                         email: email.text,
                         password: password.text).then((value) {
                       if (value){
